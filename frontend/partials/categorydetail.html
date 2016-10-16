@@ -1,0 +1,16 @@
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <label for="category">Kategorie</label>
+          <input type="text" class="form-control" ng-model="item.name" id="category"/>
+        </div>
+        <div class="form-group">
+          <label>Position</label>
+          <input type="text" class="form-control" ng-model="item.position" />
+        </div>
+        <button ng-click="add()" ng-show="!item.id" class="btn btn-default">Hinzufügen</button>
+        <button ng-click="update()" ng-show="item.id" class="btn btn-default">Aktualisieren</button>
+        <button ng-click="drop()" ng-show="item.id" class="btn btn-default">Löschen</button>
+        <button ng-click="cancel()" class="btn btn-default">Verwerfen</button>
+      </form>
+    </div>

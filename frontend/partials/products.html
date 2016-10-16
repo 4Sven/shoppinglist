@@ -1,0 +1,52 @@
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Produkt anlegen / suchen" ng-model="item.name" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click='create()'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+              <button class="btn btn-default" type="button" ng-click='search()'><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Produkte</div>
+        <table class="table">
+          <tr>
+            <th><a href="" ng-click="sort('name')"> Produktname</a></th>
+            <th><a href="" ng-click="sort('category')">Kategorie</a></th>
+            <th>Aktionen</th>
+          </tr>
+          <tr ng-repeat="item in ProductList">
+            <td>{{item.name}}</td>
+            <td>{{item.category}}</td>
+            <td>
+              <a href="" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a href="" ng-click="drop(item)"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+          </tr>
+        </table>
+        <div class="panel-footer">
+          Seite {{CurrentPage}} von {{numPages}} (Insgesamt {{TotalItems}} Einträge)
+        </div>
+      </div>
+      <pagination 
+        total-items="TotalItems" 
+        ng-model="CurrentPage" 
+        ng-change="pageChanged()" 
+        items-per-page="itemsPerPage" 
+        max-size="maxSize" 
+        num-pages="numPages"
+        class="pagination-sm" 
+        boundary-links="true" 
+        direction-links="false"
+        rotate="false" 
+        previous-text="&lsaquo;" 
+        next-text="&rsaquo;" 
+        first-text="&laquo;" 
+        last-text="&raquo;">
+      </pagination>
+    </div>

@@ -1,0 +1,49 @@
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <label for="category">Produktname</label>
+          <input type="text" class="form-control" ng-model="item.name" id="category"/>
+        </div>
+        <div class="form-group">
+          <label>Kategorie</label>
+          <select class="form-control" ng-model="item.category" convert-to-number>
+            <option ng-repeat="category in dropdownCategories" value="{{category.id}}">{{category.name}}</option>
+          </select>
+        </div>
+
+
+        <div class="panel panel-default" ng-show="item.id">
+          <div class="panel-heading">Zulässige Einheiten</div>
+          <table class="table">
+            <tr>
+              <th><a href="" ng-click="sort('unit_name')">Einheit</a></th>
+              <th>Aktion</th>
+            </tr>
+            <tr ng-repeat="unit in ItemUnitList">
+              <td>{{unit.unit_name}}</td>
+              <td>
+                <a href="" ng-click="dropUnitFromItem(unit.id)"><span class="glyphicon glyphicon-trash"></span></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+
+        <div class="form-group">
+          <label>Einheit hinzufügen</label>
+          <div class="input-group">
+            <select class="form-control" ng-model="itemunit" convert-to-number>
+              <option ng-repeat="unit in dropdownUnits" value="{{unit.unit_id}}">{{unit.unit_name}}</option>
+            </select>
+            <div class="input-group-btn">
+              <button ng-click="addUnitForProduct(item.id, itemunit)" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <button ng-click="add()" ng-show="!item.id" class="btn btn-default">Hinzufügen</button>
+        <button ng-click="update()" ng-show="item.id" class="btn btn-default">Aktualisieren</button>
+        <button ng-click="drop(item)" ng-show="item.id" class="btn btn-default">Löschen</button>
+        <button ng-click="cancel()" class="btn btn-default">Verwerfen</button>
+      </form>
+    </div>

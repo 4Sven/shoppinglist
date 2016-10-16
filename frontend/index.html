@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" ng-app="shoppingListApp">
+  <head>
+
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+      <link href="/pictures/apple-touch-icon.png" rel="apple-touch-icon" />
+      <link href="/pictures/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+      <link href="/pictures/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+      <link href="/pictures/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+      <link href="/pictures/icon-hires.png" rel="icon" sizes="192x192" />
+      <link href="/pictures/icon-normal.png" rel="icon" sizes="128x128" />
+
+      <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+      <script src="/node_modules/angular/angular.min.js"></script>
+      <script src="/node_modules/angular-resource/angular-resource.min.js"></script>
+      <script src="/node_modules/angular-route/angular-route.min.js"></script>
+      <script src="/node_modules/angular-touch/angular-touch.min.js"></script>
+
+      <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+      <script src="/node_modules/angular-bootstrap/dist/ui-bootstrap.min.js"></script>
+      <script src="/node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js"></script>
+
+      <script src="node_modules/turbine.js/src/Turbine.js"></script>
+      <link href="/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+      <!--<script src="turbineFactory.js"></script>-->
+      <script src="shoppinglist.js"></script>
+
+
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <title>Einkaufsliste</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid" ng-controller="MenuController as menu">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" ng-click='go("shoppinglist")'>Einkaufszettel</a>
+        </div> <!-- /.navbar-header -->
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="" ng-click="print()">Drucken</a></li>
+            <li><a href="" ng-click='go("editcategories")'>Kategorien pflegen</a></li>
+            <li><a href="" ng-click='go("products")'>Produkte pflegen</a></li>
+            <li><a href="" ng-click='go("meals")'>Gerichte pflegen</a></li>
+          </ul>
+        </div> <!-- /.navbar-collapse -->
+      </div> <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid">
+      <div ng-controller="AlertCtrl">
+        <alert ng-repeat='alert in alerts' type='{{alert.type}}' close='closeAlert($index)'>{{alert.msg}}</alert>
+      </div>
+    </div>
+
+    <ng-view />
+
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "Frontend for my shopping list",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shopping",
+    "list",
+    "angularjs",
+    "mysql"
+  ],
+  "author": "Sven Jerat",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "1.3.13",
+    "angular-bootstrap": "0.12.0",
+    "angular-hammer": "^2.1.10",
+    "angular-touch": "^1.3.16",
+    "bootstrap": "3.1.1",
+    "jquery": "^2.1.4",
+    "ng-resource": "^1.3.2"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "karma": "^0.12.36",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "mocha": "^2.2.5",
+    "phantomjs": "^1.9.17"
+  }
+}

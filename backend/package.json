@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "Backend for my shopping list",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shopping",
+    "list",
+    "node",
+    "mysql"
+  ],
+  "author": "Sven Jerat",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "config": "^1.13.0",
+    "connect": "^3.3.5",
+    "connect-rest": "^1.8.2",
+    "mysql": "^2.7.0",
+    "serve-favicon": "^2.2.1",
+    "serve-static": "^1.9.3",
+    "underscore": "^1.8.3"
+  }
+}

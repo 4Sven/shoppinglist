@@ -1,0 +1,30 @@
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Neue Kategorie" ng-model="item.name" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click='create()'>Erstellen!
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Kategorien</div>
+        <table class="table">
+          <tr>
+            <th>Kategoriename</th>
+            <th>Position</th>
+            <th>Aktionen</th>
+          </tr>
+          <tr ng-repeat="item in myCategoriesList">
+            <td>{{item.name}}</td>
+            <td>{{item.position}}</td>
+            <td>
+              <a href="" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a href="" ng-click="drop(item)"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+          </tr>
+        </table>
+    </div>
