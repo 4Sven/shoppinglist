@@ -540,6 +540,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		TempStoreData.set(mealData);
 	};
 
+	$scope.menu = function(mealData) {
+		$log.log(mealData);
+	};
+
 	$scope.drop = function(mealData) {
 		//$log.log("drop in list", mealData);
 		//$log.log("Delete")
