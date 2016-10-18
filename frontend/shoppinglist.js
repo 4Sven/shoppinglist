@@ -84,7 +84,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 })
 
 
-.factory('Menu', function($resource) {
+.factory('MenuData', function($resource) {
+	$log.log("Factory MenuData");
 	return $resource("/api/menu/:menuId", {menuId:'@id'}, {
 		query: {method: 'GET', isArray:false},
 		post: {method: 'POST'}
@@ -489,7 +490,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	};
 })
 
-.controller('MealListCtrl', function($scope, $log, $location, TempStoreData, Meal, Menu, Alert) {
+.controller('MealListCtrl', function($scope, $log, $location, TempStoreData, Meal, MenuData, Alert) {
 	$log.log('MealListCtrl');
 	//Pagination
 	$scope.setPage = function (pageNo) {
@@ -550,8 +551,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	$scope.addmenu = function(mealData) {
 		// Gericht zur Karte hinzufügen
+		$log.log("Add Meal to Menu")
 		$log.log(mealData);
-		Menu.post({}, {add: {"meal_id": mealData.meal_id}})
+		MenuData.post({}, {add: {"meal_id": mealData.meal_id}})
 			.$promise.then(function(data) {
 				$log.log(data);
 			}),
