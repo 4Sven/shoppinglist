@@ -343,6 +343,67 @@ function postMealData(request, content, callback) {
 	});
 };
 
+// Some functions for Meals
+function getMenuListData(request, content, callback) {
+	var resData = {};
+	//console.log(request.parameters);
+	if (!request.parameters.id) {
+		var sqlQuery = 'SELECT meal_name FROM menu, meal WHERE menu.meal_id=meal.meal_id';
+		var sql = mysql.format(sqlQuery);
+		//console.log(sql);
+		pool.query(sql, function(err, data) {
+			resData.data = data;
+			callback(err, resData);
+			//console.log(resData);
+		});
+	} else { //  hat erstmal keine verwendung
+		var sqlQuery = 'SELECT meal_id, meal_name FROM meal WHERE meal_id = ?';
+		var sql = mysql.format(sqlQuery, [
+			parseInt(request.parameters.id)
+			]);
+		//console.log(sql);
+		pool.query(sql, function(err, data) {
+			resData.data = data;
+			callback(err, resData);
+			//console.log(resData);
+		});
+	}
+};
+
+function postMenuData(request, content, callback) {
+	// Hinzufügen
+	if (content.add!==undefined) {
+		/* Prepare Queries */
+		var sqlQuery = 'INSERT INTO menu SET ?';
+		//console.log(request);
+		//console.log(content.add);
+		var sql = mysql.format(sqlQuery, content.add);
+		//console.log(sql);
+	}
+	// Aktualisieren
+	if (content.update!==undefined) { // erstmal keine verwendung
+		/* Prepare Queries */
+		var sqlQuery = 'UPDATE menu SET ? WHERE ?';
+		//console.log(request);
+		//console.log(content.add);
+		var sql = mysql.format(sqlQuery, [content.update, content.where]);
+		//console.log(sql);
+	}
+	// Entfernen
+	if (content.delete!==undefined) {
+		/* Prepare Queries */
+		var sqlQuery = 'DELETE FROM menu WHERE ?';
+		//console.log(request);
+		//console.log(content.add);
+		var sql = mysql.format(sqlQuery, [content.delete]);
+		//console.log(sql);
+	}
+	pool.query(sql, function(err, result) {
+	if (err) callback(err);
+	//console.log(result);
+	callback(null, result);
+	});
+};
 
 
 // Some functions for Units
@@ -451,12 +512,16 @@ rest.put   ('/product', updateProductData);
 rest.assign(['delete'], '/product/:productId', deleteProductData);
 
   // Meals
- rest.get  ('/meal', getMealListData);
- rest.post ('/meal', postMealData);
+rest.get  ('/meal', getMealListData);
+rest.post ('/meal', postMealData);
 
   // Units
- rest.get  ('/unit', getUnitListData);
- rest.post ('/unit', postUnitData);
+rest.get  ('/unit', getUnitListData);
+rest.post ('/unit', postUnitData);
+
+  // Menus
+rest.get  ('/menu', getMenuListData);
+rest.post ('/menu', postMenuData)
 
   // Print
 rest.get   ('/print', printOut);

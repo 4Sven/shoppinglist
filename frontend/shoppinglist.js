@@ -83,6 +83,14 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	});
 })
 
+
+.factory('Menu', function($resource) {
+	return $resource("/api/menu/:menuId", {menuId:'@id'}, {
+		query: {method: 'GET', isArray:false},
+		post: {method: 'POST'}
+	});
+})
+
 .factory('Unit', function($resource) {
 	return $resource("/api/unit/:unitlId", {unitId:'@id'}, {
 		query: {method: 'GET', isArray:true},
@@ -481,7 +489,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	};
 })
 
-.controller('MealListCtrl', function($scope, $log, $location, TempStoreData, Meal, Alert) {
+.controller('MealListCtrl', function($scope, $log, $location, TempStoreData, Meal, Menu, Alert) {
 	$log.log('MealListCtrl');
 	//Pagination
 	$scope.setPage = function (pageNo) {
@@ -540,8 +548,16 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		TempStoreData.set(mealData);
 	};
 
-	$scope.menu = function(mealData) {
+	$scope.addmenu = function(mealData) {
+		// Gericht zur Karte hinzufügen
 		$log.log(mealData);
+		Menu.post({}, {add: {"meal_id": mealData.meal_id}})
+			.$promise.then(function(data) {
+				$log.data;
+			}),
+			function(error) {
+				$log.log(error);
+			};
 	};
 
 	$scope.drop = function(mealData) {
