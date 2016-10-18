@@ -22,6 +22,12 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 				controller:  'CategoryDetailController'
 			}
 		)
+		.when('/menus',
+			{
+				templateUrl: 'partials/menus.html',
+				controller:  'MenusListCtrl'
+			}
+		)
 		.when('/meals',
 			{
 				templateUrl: 'partials/meals.html',
@@ -734,8 +740,21 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 })
 
+.controller('MenusListCtrl', function($scope, $log, MenuData) {
+	console.log("MenusListCtrl");
+
+	refresh = function() {
+		MenuData.query()
+			.$promise.then(function(data) {
+				$scope.MenuDataList = data.data;
+			}
+		);
+	};
+	refresh();
+
+})
 .controller('ProductCtrl', function($scope, $log, $location, TempStoreData, Product, Unit, Category, Alert) {
-	console.log("ProductCtrl")
+	console.log("ProductCtrl");
 	$scope.item = TempStoreData.get();
 	TempStoreData.set({});
 

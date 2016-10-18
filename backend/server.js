@@ -375,8 +375,8 @@ function postMenuData(request, content, callback) {
 	if (content.add!==undefined) {
 		/* Prepare Queries */
 		var sqlQuery = 'INSERT INTO menu SET ?';
-		console.log(request);
-		console.log(content.add);
+		//console.log(request);
+		//console.log(content.add);
 		var sql = mysql.format(sqlQuery, content.add);
 		console.log(sql);
 	}
