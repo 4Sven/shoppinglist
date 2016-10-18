@@ -553,7 +553,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$log.log(mealData);
 		Menu.post({}, {add: {"meal_id": mealData.meal_id}})
 			.$promise.then(function(data) {
-				$log.data;
+				$log.log(data);
 			}),
 			function(error) {
 				$log.log(error);
