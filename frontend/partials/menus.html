@@ -1,0 +1,22 @@
+    <div class="container-fluid">
+      <div class="panel panel-default">
+        <div class="panel-heading">Menüs für die nächsten Tage</div>
+        <table class="table">
+          <tr>
+            <th><a href="" ng-click="sort('meal_name')">Gericht</a></th>
+            <th>Aktionen</th>
+          </tr>
+          <tr ng-repeat="item in MenuDataList">
+            <td>{{item.meal_name}}</td>
+            <td>
+              <a href="" ng-click="addmenu(item)"><span class="glyphicon glyphicon-plus"></span></a>
+              <a href="" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a href="" ng-click="drop(item)"><span class="glyphicon glyphicon-trash"></span></a>
+              <a href="" ng-click="cart(item)"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+            </td>
+          </tr>
+        </table>
+        <div class="panel-footer">
+        </div>
+      </div>
+    </div>
