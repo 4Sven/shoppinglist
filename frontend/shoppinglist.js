@@ -214,6 +214,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
 		$log.debug('Running addToDB...', payload);
+		$scope.item = payload;
 		$location.path('productdetails');
 	});
 
@@ -317,7 +318,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
 		Item.name = $scope.item;
-		TempStoreData.set(Item);
+		//TempStoreData.set(Item);
 		angular.element(turbine).trigger("SubmitAnItem", Item);
 		//$log.debug(angular.element(turbine));
 	};
