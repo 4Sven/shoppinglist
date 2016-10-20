@@ -152,7 +152,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	}
 })
 
-.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, Item, ShoppingListFactory, TempStoreData) {
+.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, Item, ShoppingListFactory) {
 	$log.log('Start Factory Workflow');
 	var initObj = {
 		name           : 'testworkflow',
@@ -214,7 +214,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
 		$log.debug('Running addToDB...');
-		$log.debug('Item = ', Item);
 		$location.path('productdetails');
 	});
 
@@ -317,7 +316,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$scope.add = function() {
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
-		Item.load($scope.item);
+		TempStoreData($scope.item);
+		Item.name = $scope.item;
 		angular.element(turbine).trigger("SubmitAnItem", Item);
 		//$log.debug(angular.element(turbine));
 	};
