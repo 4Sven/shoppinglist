@@ -152,7 +152,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	}
 })
 
-.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, Item, ShoppingListFactory) {
+.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, $scope, Item, ShoppingListFactory) {
 	$log.log('Start Factory Workflow');
 	var initObj = {
 		name           : 'testworkflow',
