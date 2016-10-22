@@ -229,13 +229,16 @@ function addProductData(request, content, callback) {
 			try {
 				var query = conn.query(sql);
 				query.on('error', function(err) {
-					console.log('DEBUG', err)
+					console.log('query.on error');
+					console.log('DEBUG', err);
 					callback(null, err);
 				});
 				query.on('result', function(result) {
+					console.log('query on result');
 					callback(null, result);
 				});
 			} catch (err) {
+				console.log('Fehler im Catch');
 				console.log('TRY ',err);
 			}
 		};
