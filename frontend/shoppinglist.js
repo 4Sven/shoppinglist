@@ -190,7 +190,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					publish : {
 						message : 'makeNewEntry',
 						using : {
-							Item : getItem
+							Item : Item
 						}
 					}
 				}
@@ -604,8 +604,12 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 
 .controller('MealCtrl', function(Worklow, $scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
-	$scope.item = TempStoreData.get();
-	TempStoreData.set({});
+	//$scope.item = TempStoreData.get();
+	//TempStoreData.set({});
+
+	$rootScope.$on('makeNewEntry', function(events, args),{
+		$log.debug(events, args);
+	});
 
 	loadMeal = function(id) {
 		Meal.query({
