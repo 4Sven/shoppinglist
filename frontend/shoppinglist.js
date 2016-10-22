@@ -155,7 +155,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 .factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, Item, ShoppingListFactory) {
 	$log.log('Start Factory Workflow');
 	var initObj = {
-		name           : 'testworkflow',
+		name           : 'shoppinglist',
 		logLevel       : 'DEBUG',
 		queries        : {
 			inCatalog  : Item.inCatalog.bind(Item)
@@ -168,7 +168,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						message : 'GoToCart',
 						isAppRunning: 'true'
 					},
-					waitFor : 'SubmitAnItem',
+					waitFor : 'shoppinglist:add',
 					then : 'inCatalog'
 				}
 			},
@@ -193,12 +193,12 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	turbine = new Turbine(initObj);
 
 	var $rootScope = angular.element(turbine).bind('GoToCart', function(event, payload) {
-		$log.debug('Runningg GoToCart...');
+		$log.debug('Running GoToCart...');
 		$location.path('/shoppinglist');
 	});
 
-	var $rootScope = angular.element(turbine).bind('SubmitAnItem', function(event, payload) {
-		$log.debug('Running SubmitAnItem...', payload);
+	var $rootScope = angular.element(turbine).bind('shoppinglist:add', function(event, payload) {
+		$log.debug('Running shoppinglist:add...', payload);
 		//Item.load(payload);
 	});
 
@@ -318,7 +318,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$log.debug('ShoppingListController | add', $scope.item);
 		Item.name = $scope.item;
 		TempStoreData.set(Item);
-		angular.element(turbine).trigger("SubmitAnItem", Item);
+		angular.element(turbine).trigger("shoppinglist:add", Item);
 		//$log.debug(angular.element(turbine));
 	};
 
