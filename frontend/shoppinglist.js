@@ -184,8 +184,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					publish : {
 						message : 'addToCart'
 					},
-					waitFor : 'addedToCart',
-					then : 'isAppRunning'
+					waitFor : 'addedToCart'
 				},
 				no  : {
 					publish : {
