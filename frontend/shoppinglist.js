@@ -166,8 +166,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			inCatalog  : Item.inCatalog.bind(Item),
 			getItem    : Item.get.bind(Item)
 		},
-		init           : {
-			isAppRunning : 'yes'
+		responses      : {
+			isAppRunning : true
 		},
 		workflow       : {
 
