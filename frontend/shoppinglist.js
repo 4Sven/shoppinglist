@@ -206,7 +206,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						},
 						{
 							message : 'makeNewEntry:cancel',
-							then : 'inAppRunning'
+							then : 'isAppRunning'
 						}
 					]
 				}
