@@ -201,7 +201,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						},
 						{
 							message : 'makeNewEntry:added',
-							then : 'inCatalog'
+							then : 'makeNewEntry:addToCart'
 						}
 					]
 				}
@@ -234,6 +234,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	var $rootScope = angular.element(turbine).bind('makeNewEntry', function(event, payload) {
 		$log.debug('Running makeNewEntry...', payload);	
 		$location.path('/productdetails');
+	});
+
+	var $rootScope = angular.element(turbine).bind('makeNewEntry:addToCart', function(event, payload) {
+		$log.debug('Running makeNewEntry:addToCart...', payload);	
+		$location.path('/shoppinglist');
 	});
 
 	turbine.start();
