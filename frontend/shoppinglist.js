@@ -782,7 +782,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	console.log("ProductCtrl");
 	//$scope.item = TempStoreData.get();
 	//TempStoreData.set({});
-	
+
 	$rootScope.$on('makeNewEntry', function(events, args) {
 		$log.debug(events, args);
 	});
@@ -842,7 +842,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 				} else {
 					$log.log(data.result);
 					//insertid = neue Item nummer
-					Item.number : data.result.insertid
+					Item.number = data.result.insertid
 					angular.element(turbine).trigger('makeNewEntry:added', {Item});
 				};
 				//$location.path("/products");
