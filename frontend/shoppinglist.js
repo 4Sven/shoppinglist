@@ -848,9 +848,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 				} else {
 					$log.log(data.result);
 					//insertid = neue Item nummer
-					Item.id = data.result.insertid;
-					$log.log('Debug: ', Item);
-					var $rootScope = angular.element(turbine).trigger('makeNewEntry:added', Item);
+					$log.log('Debug: ', $scope.item);
+					var $rootScope = angular.element(turbine).trigger('makeNewEntry:added', $scope.item);
 				};
 				//$location.path("/products");
 			})
