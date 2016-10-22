@@ -223,12 +223,14 @@ function addProductData(request, content, callback) {
 	var sql = mysql.format(sqlQuery, content.add);
 	//console.log(sql);
 	try {
+		console.log('=== Debug ===');
 		pool.query(sql, function(err, result) {
 			if (err) callback(err);
 			//console.log(result);
 			callback(null, result);
 		});
 	} catch(err) {
+		console.log('Fehlerbehandlung');
 		callback(err, null);
 	}
 };
