@@ -642,7 +642,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		//$log.log("Add")
 		Meal.post({}, {add: $scope.item})
 			.$promise.then(function(data) {
-				//$log.log(data);
+				$log.log(data);
 				angular.element(turbine).trigger('makeNewEntry:added', $scope.item);
 			}),
 			function(error) {
