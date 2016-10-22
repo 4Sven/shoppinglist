@@ -232,7 +232,7 @@ function addProductData(request, content, callback) {
 		pool.query.on('error', function (err) {
 			console.log('ONERROR');
 			callback(err);
-		)};
+		});
 	} catch(err) {
 		console.log('Fehlerbehandlung', err);
 	}
