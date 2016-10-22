@@ -134,6 +134,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			if(this.id) {
 				return true;
 			} else {
+				// check if Item.name already exist (future use)
 				return false;
 			}
 		},
@@ -192,7 +193,17 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						using : {
 							Item : Item
 						}
-					}
+					},
+					waitFor : [
+						{
+							message : 'makeNewEntry:cancel',
+							then : 'GoToCart'
+						}
+						{
+							message : 'makeNewEntry:added',
+							then : 'makeNewEntry:addToCart'
+						}
+					]
 				}
 			}
 		}
@@ -632,12 +643,12 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		Meal.post({}, {add: $scope.item})
 			.$promise.then(function(data) {
 				//$log.log(data);
-				$location.path("/meals");
+				angular.element(turbine).trigger('makeNewEntry:added', $scope.item);
 			}),
 			function(error) {
 				$log.log(error);
+				Alert.openAlert('danger', error);
 			};
-		TempStoreData.set({});
 	};
 
 	$scope.update = function() {
@@ -667,7 +678,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	};
 
 	$scope.cancel = function() {
-		$location.path("/meals");
+		angular.element(turbine).trigger('makeNewEntry:cancel');
 	};
 
 	$scope.ingredients = function() {
