@@ -201,7 +201,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						},
 						{
 							message : 'makeNewEntry:added',
-							then : 'makeNewEntry:addToCart'
+							then : 'addToCart'
 						}
 					]
 				}
@@ -615,8 +615,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 
 .controller('MealCtrl', function(Worklow, $scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
-	//$scope.item = TempStoreData.get();
-	//TempStoreData.set({});
+	$scope.item = TempStoreData.get();
+	TempStoreData.set({});
 
 	loadMeal = function(id) {
 		Meal.query({
@@ -780,13 +780,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 })
 .controller('ProductCtrl', function($scope, $rootScope, $log, $location, Item, TempStoreData, Product, Unit, Category, Alert) {
 	console.log("ProductCtrl");
-	//$scope.item = TempStoreData.get();
-	//TempStoreData.set({});
-
-	$rootScope.$on('makeNewEntry', function(events, args) {
-		$log.debug(events, args);
-	});
-
+	$scope.item = TempStoreData.get();
+	TempStoreData.set({});
 
 	getCategories = function() {
 		Category.query()
@@ -842,7 +837,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 				} else {
 					$log.log(data.result);
 					//insertid = neue Item nummer
-					Item.number = data.result.insertid
+					Item.id = data.result.insertid
 					angular.element(turbine).trigger('makeNewEntry:added', {Item});
 				};
 				//$location.path("/products");
