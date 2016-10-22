@@ -835,11 +835,13 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		Product.post({}, {add: $scope.item})
 			.$promise.then(function(data) {
 				$log.log('DEBUG', data);
-				$location.path("/products");
-			}),
-			function(error) {
-				$log.log('ERROR', error);
-			};
+				if (data.error) {
+					$log.log(data.error);
+				} else {
+					$log.log(data.result);
+				};
+				//$location.path("/products");
+			})
 		//TempStoreData.set({});
 	};
 
