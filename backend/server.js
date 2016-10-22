@@ -224,16 +224,20 @@ function addProductData(request, content, callback) {
 	//console.log(sql);
 	pool.getConnection(function(err, conn) {
 		if(err){
-			console.log('DEBUGx', err);
+			console.log('Error Connection: ', err);
 		} else {
-			var query = conn.query(sql);
-			query.on('error', function(err) {
-				console.log('DEBUGy', err)
-				callback(err);
-			});
-			query.on('result', function(result) {
-				callback(null, result);
-			});
+			try {
+				var query = conn.query(sql);
+				query.on('error', function(err) {
+					console.log('DEBUG', err)
+					callback(err, err);
+				});
+				query.on('result', function(result) {
+					callback(null, result);
+				});
+			} case (err) {
+				console.log('TRY ',err)
+			};
 		};
 	});
 };
