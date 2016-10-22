@@ -172,7 +172,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		workflow       : {
 
 			isAppRunning : {
-				no : {
+				yes : {
 					publish : {
 						message : 'GoToCart'
 					},
