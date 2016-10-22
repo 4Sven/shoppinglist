@@ -166,13 +166,15 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			inCatalog  : Item.inCatalog.bind(Item),
 			getItem    : Item.get.bind(Item)
 		},
+		init           : {
+			isAppRunning : 'yes'
+		},
 		workflow       : {
 
 			isAppRunning : {
 				no : {
 					publish : {
-						message : 'GoToCart',
-						isAppRunning: 'true'
+						message : 'GoToCart'
 					},
 					waitFor : 'shoppinglist:add',
 					then : 'inCatalog'
@@ -185,7 +187,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						message : 'addToCart'
 					},
 					waitFor : 'addedToCart',
-					then : 'stop.'
+					then : 'isAppRunning'
 				},
 				no  : {
 					publish : {
