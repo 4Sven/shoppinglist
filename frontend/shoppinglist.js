@@ -212,6 +212,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		//$location.path('/shoppinglist');
 	});
 
+	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
+		$log.debug('Running addToDB...', payload);	
+		$location.path('productdetails');
+	});
+
 	turbine.start();
 
 	//$log.debug('after turbine start', angular.element(turbine));
@@ -312,7 +317,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
 		Item.name = $scope.item;
-		//TempStoreData.set(Item);
+		TempStoreData.set(Item);
 		angular.element(turbine).trigger("SubmitAnItem", Item);
 		//$log.debug(angular.element(turbine));
 	};
@@ -591,14 +596,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 
 .controller('MealCtrl', function(Worklow, $scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
-	//$scope.item = TempStoreData.get();
-	//TempStoreData.set({});
-
-	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
-		$log.debug('Running addToDB...', payload);	
-		$location.path('productdetails');
-		$scope.item = payload;
-	});
+	$scope.item = TempStoreData.get();
+	TempStoreData.set({});
 
 	loadMeal = function(id) {
 		Meal.query({
