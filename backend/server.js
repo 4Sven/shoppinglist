@@ -227,8 +227,11 @@ function addProductData(request, content, callback) {
 			console.log(err);
 		} else {
 			var query = conn.query(sql, function(err, result) {
-				if (err) callback(err);
-				callback(null, result);
+				if (err) {
+					console.log(err)
+				} else {
+					callback(null, result);
+				}
 			})
 			query.on('error', function(err) {
 				callback(err);
