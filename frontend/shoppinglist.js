@@ -843,7 +843,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					$log.log(data.result);
 					//insertid = neue Item nummer
 					Item.id = data.result.insertid
-					angular.element(turbine).trigger('makeNewEntry:added', {Item});
+					var $rootScope = angular.element(turbine).trigger('makeNewEntry:added', {Item});
 				};
 				//$location.path("/products");
 			})
@@ -915,7 +915,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	};
 
 	$scope.cancel = function() {
-		$location.path("/products");
+		var $rootScope = angular.element(turbine).trigger('makeNewEntry:cancel');
 	};
 
 })
