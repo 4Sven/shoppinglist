@@ -778,7 +778,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	refresh();
 
 })
-.controller('ProductCtrl', function($scope, $log, $location, Item, TempStoreData, Product, Unit, Category, Alert) {
+.controller('ProductCtrl', function($scope, $rootScope, $log, $location, Item, TempStoreData, Product, Unit, Category, Alert) {
 	console.log("ProductCtrl");
 	//$scope.item = TempStoreData.get();
 	//TempStoreData.set({});
