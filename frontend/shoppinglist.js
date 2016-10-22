@@ -590,7 +590,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 })
 
 
-.controller('MealCtrl', function($scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
+.controller('MealCtrl', function(Worklow, $scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
 	//$scope.item = TempStoreData.get();
 	//TempStoreData.set({});
 
