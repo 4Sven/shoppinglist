@@ -618,10 +618,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	//$scope.item = TempStoreData.get();
 	//TempStoreData.set({});
 
-	$rootScope.$on('makeNewEntry', function(events, args) {
-		$log.debug(events, args);
-	});
-
 	loadMeal = function(id) {
 		Meal.query({
 			id: id
@@ -678,7 +674,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	};
 
 	$scope.cancel = function() {
-		angular.element(turbine).trigger('makeNewEntry:cancel');
+		angular.element(turbine).trigger('makeNewMeal:cancel');
 	};
 
 	$scope.ingredients = function() {
@@ -782,10 +778,15 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	refresh();
 
 })
-.controller('ProductCtrl', function($scope, $log, $location, TempStoreData, Product, Unit, Category, Alert) {
+.controller('ProductCtrl', function($scope, $log, $location, Item, TempStoreData, Product, Unit, Category, Alert) {
 	console.log("ProductCtrl");
-	$scope.item = TempStoreData.get();
-	TempStoreData.set({});
+	//$scope.item = TempStoreData.get();
+	//TempStoreData.set({});
+	
+	$rootScope.$on('makeNewEntry', function(events, args) {
+		$log.debug(events, args);
+	});
+
 
 	getCategories = function() {
 		Category.query()
@@ -840,6 +841,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					Alert.openAlert('danger', 'Sie können diesen Artikel nicht hinzufügen (' + data.error.errno + ')!');
 				} else {
 					$log.log(data.result);
+					//insertid = neue Item nummer
+					Item.number : data.result.insertid
+					angular.element(turbine).trigger('makeNewEntry:added', {Item});
 				};
 				//$location.path("/products");
 			})
