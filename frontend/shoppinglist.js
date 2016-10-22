@@ -607,7 +607,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	//$scope.item = TempStoreData.get();
 	//TempStoreData.set({});
 
-	$rootScope.$on('makeNewEntry', function(events, args),{
+	$rootScope.$on('makeNewEntry', function(events, args) {
 		$log.debug(events, args);
 	});
 
