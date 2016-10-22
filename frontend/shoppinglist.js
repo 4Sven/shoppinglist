@@ -353,7 +353,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		if ($scope.item.id) {
 			Item.load($scope.item);
 		} else {
-			Item.load({null,$scope.item,null});
+			Item.load({
+				id         :null,
+				name       :$scope.item,
+				category   :null
+			});
 		};
 		angular.element(turbine).trigger("shoppinglist:add", Item);
 		//$log.debug(angular.element(turbine));
