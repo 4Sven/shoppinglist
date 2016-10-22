@@ -347,9 +347,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$scope.add = function() {
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
-		Item = $scope.item;
-		TempStoreData.set(Item);
-		angular.element(turbine).trigger("shoppinglist:add", Item);
+		TempStoreData.set($scope.item);
+		angular.element(turbine).trigger("shoppinglist:add", $scope.item);
 		//$log.debug(angular.element(turbine));
 	};
 
