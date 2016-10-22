@@ -201,7 +201,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						},
 						{
 							message : 'makeNewEntry:added',
-							then : 'addToCart'
+							then : 'inCatalog'
 						}
 					]
 				}
