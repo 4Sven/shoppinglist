@@ -337,12 +337,14 @@ function postMealData(request, content, callback) {
 		//console.log(sql);
 	}
 	try {
+		console.log('=== Debug ===')
 		pool.query(sql, function(err, result) {
 		if (err) callback(err, null);
 		//console.log(result);
 		callback(null, result);
 		});		
 	} catch (err) {
+		console.log('Fehlerbehandlung!')
 		callback(err, null);
 	}
 };
