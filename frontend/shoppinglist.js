@@ -831,12 +831,13 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	}
 
 	$scope.add = function() {
-		$log.log("Add")
+		//$log.log("Add")
 		Product.post({}, {add: $scope.item})
 			.$promise.then(function(data) {
-				$log.log('DEBUG', data);
+				//$log.log('DEBUG', data);
 				if (data.error) {
 					$log.log(data.error);
+					Alert.openAlert('danger', 'Sie können diesen Artikel nicht hinzufügen (' + data.error.errno + ')!');
 				} else {
 					$log.log(data.result);
 				};
