@@ -198,7 +198,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						{
 							message : 'makeNewEntry:cancel',
 							then : 'GoToCart'
-						}
+						},
 						{
 							message : 'makeNewEntry:added',
 							then : 'makeNewEntry:addToCart'
