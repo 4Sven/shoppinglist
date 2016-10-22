@@ -229,6 +229,7 @@ function addProductData(request, content, callback) {
 			//console.log(result);
 			callback(null, result);
 		});
+		pool.query.on('error', callback(err, null));
 	} catch(err) {
 		console.log('Fehlerbehandlung');
 		callback(err, null);
