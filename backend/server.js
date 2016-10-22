@@ -218,30 +218,15 @@ function getProductListData(request, content, callback) {
 function addProductData(request, content, callback) {
 	/* Prepare Queries */
 	var sqlQuery = 'INSERT INTO item SET ?';
-	console.log(request);
-	console.log(content.add);
+	//console.log(request);
+	//console.log(content.add);
 	var sql = mysql.format(sqlQuery, content.add);
-	console.log(sql);
-	pool.getConnection(function(err, conn) {
-		if(err){
-			console.log('Error Connection: ', err);
-		} else {
-			try {
-				var query = conn.query(sql);
-				query.on('error', function(err) {
-					console.log('query.on error');
-					console.log('DEBUG', err);
-					callback({result: err});
-				});
-				query.on('result', function(result) {
-					console.log('query on result');
-					callback(null, result);
-				});
-			} catch (err) {
-				console.log('Fehler im Catch');
-				console.log('TRY ',err);
-			}
-		};
+	//console.log(sql);
+	pool.query(sql, function(err, result) {
+		callback(null,{
+			error : err,
+			result : result
+		});
 	});
 };
 
