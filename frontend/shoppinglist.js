@@ -210,19 +210,18 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	turbine = new Turbine(initObj);
 
 	var $rootScope = angular.element(turbine).bind('GoToCart', function(event, payload) {
+		Item.reset();
 		$log.debug('Running GoToCart...', payload, Item);
 		$location.path('/shoppinglist');
 	});
 
 	var $rootScope = angular.element(turbine).bind('shoppinglist:add', function(event, payload) {
-		$log.debug('Running shoppinglist:add...', payload, Item);
 		Item.load(payload);
-		//Item.load(payload);
+		$log.debug('Running shoppinglist:add...', payload, Item);
 	});
 
 	var $rootScope = angular.element(turbine).bind('shoppinglist:added', function(event, payload) {
 		$log.debug('Running shoppinglist:added...', payload, Item);
-		//Item.load(payload);
 	});
 
 	var $rootScope = angular.element(turbine).bind('addToCart', function(event, payload) {
@@ -232,7 +231,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					Item.reset();
 					angular.element(turbine).trigger('addedToCart');
 				});
-		//$location.path('/shoppinglist');
 	});
 
 	var $rootScope = angular.element(turbine).bind('makeNewEntry', function(event, payload) {
