@@ -222,20 +222,19 @@ function addProductData(request, content, callback) {
 	//console.log(content.add);
 	var sql = mysql.format(sqlQuery, content.add);
 	//console.log(sql);
-	try {
-		console.log('=== Debug ===');
-		pool.query(sql, function(err, result) {
-			if (err) callback(err);
-			//console.log(result);
-			callback(null, result);
-		});
-		pool.query.on('error', function (err) {
-			console.log('ONERROR');
-			callback(err);
-		});
-	} catch(err) {
-		console.log('Fehlerbehandlung', err);
-	}
+	pool.getConnection(function(err, conn) {
+		if(err){
+			console.log(err);
+		} else {
+			var query = conn.query(sql, function(err, result) {
+				if (err) callback(err);
+				callback(null, result);
+			})
+			query.on('error', function(err) {
+				callback(err);
+			})
+		};
+	});
 };
 
 function updateProductData(request, content, callback) {
