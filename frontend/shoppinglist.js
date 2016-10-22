@@ -350,34 +350,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$scope.add = function() {
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
-		TempStoreData.set($scope.item);
-		angular.element(turbine).trigger("shoppinglist:add", $scope.item);
+		Item.load($scope.item);
+		angular.element(turbine).trigger("shoppinglist:add", Item);
 		//$log.debug(angular.element(turbine));
-	};
-
-	$scope.add_old = function() {
-		
-		
-		//Workflow.setResponse('isProductSelected');
-		if ($scope.item.id) {
-			//Workflow.setResponse('isProduct', true);
-			//$log.log(Workflow);
-			ShoppingListFactory.post({}, {item: $scope.item.id, quantity: 1})
-				.$promise.then(function(data) {
-					//$log.log(data);
-					refresh();	
-				});
-				$scope.item = undefined;
-		} else {
-			//Workflow.setResponse('isProduct', false);
-			itemname = $scope.item;
-			$scope.item = {};
-			$scope.item.name = itemname;
-			TempStoreData.set($scope.item);
-			// $log.log($scope.item);
-			$location.path('/productdetails');
-
-		}
 	};
 
 	$scope.drop = function(productListData) {
