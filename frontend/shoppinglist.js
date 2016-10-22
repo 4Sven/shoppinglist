@@ -834,11 +834,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$log.log("Add")
 		Product.post({}, {add: $scope.item})
 			.$promise.then(function(data) {
-				//$log.log(data);
+				$log.log('DEBUG', data);
 				$location.path("/products");
 			}),
 			function(error) {
-				$log.log(error);
+				$log.log('ERROR', error);
 			};
 		TempStoreData.set({});
 	};
