@@ -840,7 +840,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			function(error) {
 				$log.log('ERROR', error);
 			};
-		TempStoreData.set({});
+		//TempStoreData.set({});
 	};
 
 	$scope.addUnitForProduct = function(item, unit) {

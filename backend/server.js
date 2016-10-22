@@ -218,10 +218,10 @@ function getProductListData(request, content, callback) {
 function addProductData(request, content, callback) {
 	/* Prepare Queries */
 	var sqlQuery = 'INSERT INTO item SET ?';
-	//console.log(request);
-	//console.log(content.add);
+	console.log(request);
+	console.log(content.add);
 	var sql = mysql.format(sqlQuery, content.add);
-	//console.log(sql);
+	console.log(sql);
 	pool.getConnection(function(err, conn) {
 		if(err){
 			console.log('Error Connection: ', err);
