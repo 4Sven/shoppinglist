@@ -196,12 +196,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					},
 					waitFor : [
 						{
-							message : 'makeNewEntry:cancel',
-							then : 'GoToCart'
-						},
-						{
 							message : 'makeNewEntry:added',
-							then : 'makeNewEntry:addToCart'
+							then : 'inCatalog'
 						}
 					]
 				}
@@ -221,6 +217,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		//Item.load(payload);
 	});
 
+	var $rootScope = angular.element(turbine).bind('shoppinglist:added', function(event, payload) {
+		$log.debug('Running shoppinglist:added...', payload);
+		//Item.load(payload);
+	});
+
 	var $rootScope = angular.element(turbine).bind('addToCart', function(event, payload) {
 		$log.debug('Running addToCart...');
 		ShoppingListFactory.post({}, {item: Item.id, quantity: 1})
@@ -234,6 +235,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	var $rootScope = angular.element(turbine).bind('makeNewEntry', function(event, payload) {
 		$log.debug('Running makeNewEntry...', payload);	
 		$location.path('/productdetails');
+	});
+
+	var $rootScope = angular.element(turbine).bind('makeNewEntry:cancel', function(event, payload) {
+		$log.debug('Running makeNewEntry:cancel...', payload);	
+		$location.path('/shoppinglist');
 	});
 
 	var $rootScope = angular.element(turbine).bind('makeNewEntry:addToCart', function(event, payload) {
