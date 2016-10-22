@@ -336,11 +336,15 @@ function postMealData(request, content, callback) {
 		var sql = mysql.format(sqlQuery, [content.delete]);
 		//console.log(sql);
 	}
-	pool.query(sql, function(err, result) {
-	if (err) callback(err, null);
-	//console.log(result);
-	callback(null, result);
-	});
+	try {
+		pool.query(sql, function(err, result) {
+		if (err) callback(err, null);
+		//console.log(result);
+		callback(null, result);
+		});		
+	} catch (err) {
+		callback(err, null);
+	}
 };
 
 // Some functions for Meals
