@@ -152,7 +152,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	}
 })
 
-.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, $scope, Item, ShoppingListFactory) {
+.factory('Workflow', ['$log', '$location', '$rootScope', 'Item', 'ShoppingListFactory', function($log, $location, $rootScope, Item, ShoppingListFactory) {
 	$log.log('Start Factory Workflow');
 	var initObj = {
 		name           : 'testworkflow',
@@ -210,12 +210,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					angular.element(turbine).trigger('addedToCart');
 				});
 		//$location.path('/shoppinglist');
-	});
-
-	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
-		$log.debug('Running addToDB...', payload);
-		$scope.item = payload;
-		$location.path('productdetails');
 	});
 
 	turbine.start();
@@ -596,9 +590,15 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 })
 
 
-.controller('MealCtrl', function($scope, $log, $location, TempStoreData, Meal, Alert) {
-	$scope.item = TempStoreData.get();
-	TempStoreData.set({});
+.controller('MealCtrl', function($scope, $rootScope, $log, $location, TempStoreData, Meal, Alert) {
+	//$scope.item = TempStoreData.get();
+	//TempStoreData.set({});
+
+	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
+		$log.debug('Running addToDB...', payload);	
+		$location.path('productdetails');
+		$scope.item = payload;
+	});
 
 	loadMeal = function(id) {
 		Meal.query({
