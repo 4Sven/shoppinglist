@@ -224,10 +224,11 @@ function addProductData(request, content, callback) {
 	//console.log(sql);
 	pool.getConnection(function(err, conn) {
 		if(err){
-			console.log(err);
+			console.log('DEBUG', err);
 		} else {
 			var query = conn.query(sql);
 			query.on('error', function(err) {
+				console.log('DEBUG', err)
 				callback(err);
 			});
 			query.on('result', function(result) {
