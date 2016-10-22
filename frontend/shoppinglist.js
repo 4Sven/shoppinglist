@@ -131,6 +131,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		id       : null,
 
 		inCatalog: function() {
+			$log.log('inCatalog ', this.id);
 			if(this.id) {
 				return true;
 			} else {
@@ -140,12 +141,14 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		},
 
 		reset: function() {
+			$log.log('reset Item');
 			this.name = "";
 			this.category = "";
 			this.id = null;
 		},
 
 		load: function(item) {
+			$log.log('load Item', item);
 			this.id = item.id;
 			this.name = item.name;
 			this.category = item.category;
