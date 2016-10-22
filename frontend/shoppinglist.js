@@ -214,6 +214,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	var $rootScope = angular.element(turbine).bind('shoppinglist:add', function(event, payload) {
 		$log.debug('Running shoppinglist:add...', payload, Item);
+		Item.load(payload);
 		//Item.load(payload);
 	});
 
