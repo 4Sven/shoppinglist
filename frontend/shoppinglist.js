@@ -846,9 +846,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					$log.log(data.error);
 					Alert.openAlert('danger', 'Sie können diesen Artikel nicht hinzufügen (' + data.error.errno + ')!');
 				} else {
-					$log.log(data.result, data.result.insertid);
+					$log.log(data.result, data.result.insertId);
 					//insertid = neue Item nummer
-					$scope.item.id = data.result.insertid;
+					$scope.item.id = data.result.insertId;
 					$log.log('Debug: ', $scope.item);
 					var $rootScope = angular.element(turbine).trigger('makeNewEntry:added', $scope.item);
 				};
