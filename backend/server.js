@@ -226,16 +226,13 @@ function addProductData(request, content, callback) {
 		if(err){
 			console.log(err);
 		} else {
-			var query = conn.query(sql, function(err, result) {
-				if (err) {
-					console.log(err)
-				} else {
-					callback(null, result);
-				}
-			})
+			var query = conn.query(sql);
 			query.on('error', function(err) {
 				callback(err);
-			})
+			});
+			query.on('result', function(result) {
+				callback(null, result);
+			});
 		};
 	});
 };
