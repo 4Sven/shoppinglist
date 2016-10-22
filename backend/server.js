@@ -222,11 +222,15 @@ function addProductData(request, content, callback) {
 	//console.log(content.add);
 	var sql = mysql.format(sqlQuery, content.add);
 	//console.log(sql);
-	pool.query(sql, function(err, result) {
-		if (err) callback(err);
-		//console.log(result);
-		callback(null, result);
-	});
+	try {
+		pool.query(sql, function(err, result) {
+			if (err) callback(err);
+			//console.log(result);
+			callback(null, result);
+		});
+	} catch(err) {
+		callback(err, null);
+	}
 };
 
 function updateProductData(request, content, callback) {
@@ -337,14 +341,14 @@ function postMealData(request, content, callback) {
 		//console.log(sql);
 	}
 	try {
-		console.log('=== Debug ===')
+		//console.log('=== Debug ===')
 		pool.query(sql, function(err, result) {
 		if (err) callback(err, null);
 		//console.log(result);
 		callback(null, result);
 		});		
 	} catch (err) {
-		console.log('Fehlerbehandlung!')
+		// console.log('Fehlerbehandlung!')
 		callback(err, null);
 	}
 };
