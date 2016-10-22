@@ -337,7 +337,7 @@ function postMealData(request, content, callback) {
 		//console.log(sql);
 	}
 	pool.query(sql, function(err, result) {
-	if (err) callback(err);
+	if (err) callback(err, null);
 	//console.log(result);
 	callback(null, result);
 	});
