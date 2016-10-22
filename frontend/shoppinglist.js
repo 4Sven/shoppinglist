@@ -203,6 +203,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						{
 							message : 'makeNewEntry:added',
 							then : 'inCatalog'
+						},
+						{
+							message : 'makeNewEntry:cancel',
+							then : 'inAppRunning'
 						}
 					]
 				}
