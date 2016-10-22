@@ -208,22 +208,22 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	turbine = new Turbine(initObj);
 
 	var $rootScope = angular.element(turbine).bind('GoToCart', function(event, payload) {
-		$log.debug('Running GoToCart...');
+		$log.debug('Running GoToCart...', payload, Item);
 		$location.path('/shoppinglist');
 	});
 
 	var $rootScope = angular.element(turbine).bind('shoppinglist:add', function(event, payload) {
-		$log.debug('Running shoppinglist:add...', payload);
+		$log.debug('Running shoppinglist:add...', payload, Item);
 		//Item.load(payload);
 	});
 
 	var $rootScope = angular.element(turbine).bind('shoppinglist:added', function(event, payload) {
-		$log.debug('Running shoppinglist:added...', payload);
+		$log.debug('Running shoppinglist:added...', payload, Item);
 		//Item.load(payload);
 	});
 
 	var $rootScope = angular.element(turbine).bind('addToCart', function(event, payload) {
-		$log.debug('Running addToCart...');
+		$log.debug('Running addToCart...', payload, Item);
 		ShoppingListFactory.post({}, {item: Item.id, quantity: 1})
 				.$promise.then(function(data) {
 					Item.reset();
@@ -233,17 +233,17 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	});
 
 	var $rootScope = angular.element(turbine).bind('makeNewEntry', function(event, payload) {
-		$log.debug('Running makeNewEntry...', payload);	
+		$log.debug('Running makeNewEntry...', payload, Item);	
 		$location.path('/productdetails');
 	});
 
 	var $rootScope = angular.element(turbine).bind('makeNewEntry:cancel', function(event, payload) {
-		$log.debug('Running makeNewEntry:cancel...', payload);	
+		$log.debug('Running makeNewEntry:cancel...', payload, Item);	
 		$location.path('/shoppinglist');
 	});
 
 	var $rootScope = angular.element(turbine).bind('makeNewEntry:addToCart', function(event, payload) {
-		$log.debug('Running makeNewEntry:addToCart...', payload);	
+		$log.debug('Running makeNewEntry:addToCart...', payload, Item);	
 		$location.path('/shoppinglist');
 	});
 
