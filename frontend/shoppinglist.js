@@ -148,6 +148,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			this.id = item.id;
 			this.name = item.name;
 			this.category = item.category;
+		},
+
+		get: function() {
+			return this;
 		}
 	}
 })
@@ -158,7 +162,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		name           : 'shoppinglist',
 		logLevel       : 'DEBUG',
 		queries        : {
-			inCatalog  : Item.inCatalog.bind(Item)
+			inCatalog  : Item.inCatalog.bind(Item),
+			getItem    : Item.get.bind(Item)
 		},
 		workflow       : {
 
@@ -183,7 +188,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 				},
 				no  : {
 					publish : {
-						message : 'addToDB'
+						message : 'makeNewEntry',
+						using : {
+							Item : getItem
+						}
 					}
 				}
 			}
@@ -212,9 +220,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		//$location.path('/shoppinglist');
 	});
 
-	var $rootScope = angular.element(turbine).bind('addToDB', function(event, payload) {
-		$log.debug('Running addToDB...', payload);	
-		$location.path('productdetails');
+	var $rootScope = angular.element(turbine).bind('makeNewEntry', function(event, payload) {
+		$log.debug('Running makeNewEntry...', payload);	
+		$location.path('/productdetails');
 	});
 
 	turbine.start();
