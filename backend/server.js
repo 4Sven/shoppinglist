@@ -231,7 +231,7 @@ function addProductData(request, content, callback) {
 				query.on('error', function(err) {
 					console.log('query.on error');
 					console.log('DEBUG', err);
-					callback(null, {result: err});
+					callback({result: err});
 				});
 				query.on('result', function(result) {
 					console.log('query on result');
