@@ -235,9 +235,9 @@ function addProductData(request, content, callback) {
 				query.on('result', function(result) {
 					callback(null, result);
 				});
-			} case (err) {
-				console.log('TRY ',err)
-			};
+			} catch (err) {
+				console.log('TRY ',err);
+			}
 		};
 	});
 };
