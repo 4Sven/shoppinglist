@@ -350,7 +350,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$scope.add = function() {
 		startWorkflow();
 		$log.debug('ShoppingListController | add', $scope.item);
-		Item.load($scope.item);
+		if ($scope.item.id) {
+			Item.load($scope.item);
+		} else {
+			Item.load({null,$scope.item,null});
+		};
 		angular.element(turbine).trigger("shoppinglist:add", Item);
 		//$log.debug(angular.element(turbine));
 	};
