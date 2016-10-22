@@ -229,8 +229,8 @@ function addProductData(request, content, callback) {
 			try {
 				var query = conn.query(sql);
 				query.on('error', function(err) {
-					console.log('DEBUG', err)
-					callback(err, err);
+					//console.log('DEBUG', err)
+					callback(null, err);
 				});
 				query.on('result', function(result) {
 					callback(null, result);
