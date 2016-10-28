@@ -789,7 +789,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	// Produkt bearbeiten
 	$scope.edit = function(productData) {
-		Item = productData;
+		Item.set(productData);
 		$location.path("/productdetails");
 	};
 
