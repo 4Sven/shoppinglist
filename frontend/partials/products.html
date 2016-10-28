@@ -34,22 +34,24 @@
         </div>
       </div>
       <div class="btn-group btn-group-justified" role="group">
-        <pagination 
-          total-items="TotalItems" 
-          ng-model="CurrentPage" 
-          ng-change="pageChanged()" 
-          items-per-page="itemsPerPage" 
-          max-size="maxSize" 
-          num-pages="numPages"
-          class="btn btn-default" 
-          boundary-links="true" 
-          direction-links="false"
-          rotate="false" 
-          previous-text="&lsaquo;" 
-          next-text="&rsaquo;" 
-          first-text="&laquo;" 
-          last-text="&raquo;">
-        </pagination>
+        <div class="btn-group" role="group">
+          <pagination 
+            total-items="TotalItems" 
+            ng-model="CurrentPage" 
+            ng-change="pageChanged()" 
+            items-per-page="itemsPerPage" 
+            max-size="maxSize" 
+            num-pages="numPages"
+            class="btn" 
+            boundary-links="true" 
+            direction-links="false"
+            rotate="false" 
+            previous-text="&lsaquo;" 
+            next-text="&rsaquo;" 
+            first-text="&laquo;" 
+            last-text="&raquo;">
+          </pagination>
+        </div>
         <div class="btn-group" role="group">
           <button ng-click="back()" type="button" class="btn btn-default">Zurück</button>
         </div>
