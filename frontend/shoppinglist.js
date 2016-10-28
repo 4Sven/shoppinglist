@@ -170,7 +170,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			getItem    : Item.get.bind(Item)
 		},
 		responses      : {
-			isAppRunning : true
+			isAppRunning : true,
+			editProducts : true
 		},
 		workflow       : {
 
@@ -187,6 +188,26 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						{
 							message : 'shoppinglist:trash',
 							then : 'isAppRunning'
+						},
+						{
+							message : 'GoToProducts',
+							then : 'editProducts'
+						}
+					]
+				}
+			},
+
+			editProducts : {
+				yes : {
+					publish : {
+						message : 'GoToProductsList'
+					},
+					waitFor : [
+						{
+							message : 'productList:add'
+						},
+						{
+							message : 'productList:edit'
 						}
 					]
 				}
@@ -230,6 +251,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$location.path('/shoppinglist');
 	});
 
+	var $rootScope = angular.element(turbine).bind('GoToProductsList', function(event, payload) {
+		$log.debug('Running GoToProductsList...', payload, Item);
+		$location.path('/products');
+	});
+
 	var $rootScope = angular.element(turbine).bind('shoppinglist:add', function(event, payload) {
 		Item.load(payload);
 		$log.debug('Running shoppinglist:add...', payload, Item);
@@ -271,7 +297,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 }])
 
-.controller('MenuController', ['Workflow', '$scope', '$location', '$log', 'Printer', function (Workflow, $scope, $location, $log, Printer) {
+.controller('MenuController', ['Workflow', '$scope', '$location', '$log', 'Printer', function (Workflow, $scope, $location, $log) {
 
 	$('.nav a').on('click', function(){
 		$(".navbar-toggle").click();
@@ -285,10 +311,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$log.log(event);
 	};
 
-	$scope.print = function() {
-		//$log.log('Drucken gedrückt');
-		Printer.query();
-	}
 }])
 
 // Factory und Controller für Meldungen an Benutzer.
@@ -315,7 +337,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$rootScope.closeAlert = Alert.closeAlert;
 })
 
-.controller('ShoppingListController', function(Workflow, Item, $scope, $rootScope, $log, $location, ShoppingListFactory, Product, TempStoreData) {
+.controller('ShoppingListController', function(Workflow, Item, Printer, $scope, $rootScope, $log, $location, ShoppingListFactory, Product, TempStoreData) {
 	
 	$log.debug('ShoppingListController');	
 	
@@ -358,6 +380,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			refresh();
 		});
 	};
+
+	$scope.print = function() {
+		//$log.log('Drucken gedrückt');
+		Printer.query();
+	}
 
 	$scope.add = function() {
 		startWorkflow();
@@ -434,7 +461,16 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			});
 	};
 
+    $scope.goDetails = function() {
+      angular.element(turbine).trigger("GoToProducts");
+    };
 
+    Sscope.clearList = function() {
+    	ShoppingListFactory.post({}, {truncate: true})
+    		.$promise.then(function(data) {
+    			refresh();
+    		});
+    };
 
 })
 

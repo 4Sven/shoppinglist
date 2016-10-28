@@ -55,7 +55,7 @@ function addShoppingListData(request, content, callback) {
 		/* Prepare Queries */
 		var sqlQuery = 'UPDATE list SET quantity=quantity+1 WHERE item=?';
 		//console.log(request);
-		console.log(content);
+		//console.log(content);
 		var sql = mysql.format(sqlQuery, content.plusone);
 		// console.log(sql);
 	} 
@@ -63,7 +63,7 @@ function addShoppingListData(request, content, callback) {
 		/* Prepare Queries */
 		var sqlQuery = 'UPDATE list SET quantity=quantity-1 WHERE item=?';
 		//console.log(request);
-		console.log(content);
+		//console.log(content);
 		var sql = mysql.format(sqlQuery, content.minusone);
 		// console.log(sql);
 	} 
@@ -71,7 +71,7 @@ function addShoppingListData(request, content, callback) {
 		/* Prepare Queries */
 		var sqlQuery = 'DELETE FROM list WHERE item = ?';
 		//console.log(request);
-		console.log(content);
+		//console.log(content);
 		var sql = mysql.format(sqlQuery, content.minusone);
 		// console.log(sql);
 	} 
@@ -82,6 +82,10 @@ function addShoppingListData(request, content, callback) {
 		// console.log(content);
 		var sql = mysql.format(sqlQuery, content);
 		// console.log(sql);
+	}
+	if (content.truncate !== undefined) {
+		var sqlQuery = 'TRUNCATE TABLE list';
+		var sql = mysql.format(sqlQuery);
 	}
 	pool.query(sql, function(err, result) {
 		callback(err, result);
@@ -385,7 +389,7 @@ function postMenuData(request, content, callback) {
 		//console.log(request);
 		//console.log(content.add);
 		var sql = mysql.format(sqlQuery, content.add);
-		console.log(sql);
+		//console.log(sql);
 	}
 	// Aktualisieren
 	if (content.update!==undefined) { // erstmal keine verwendung
@@ -416,15 +420,15 @@ function postMenuData(request, content, callback) {
 // Some functions for Units
 function getUnitListData(request, content, callback) {
 	if (!request.parameters.id) {
-		console.log('run getUnitListData ohne ID');
+		//console.log('run getUnitListData ohne ID');
 		var sqlQuery = 'SELECT unit_id, unit_name FROM unit';
 		var sql = mysql.format(sqlQuery);
-		console.log(sql);
+		//console.log(sql);
 	} else {
-		console.log('run getUnitListData mit ID');
+		//console.log('run getUnitListData mit ID');
 		var sqlQuery = 'SELECT i.id as id, i.item_id AS unit_id, u.unit_name AS unit_name FROM  `item_unit` i,  `unit` u WHERE i.unit_id = u.unit_id AND item_id = ?';
 		var sql = mysql.format(sqlQuery, request.parameters.id);
-		console.log(sql);
+		//console.log(sql);
 	}
 	pool.query(sql, function(err, data) {
 		callback(err, data);
@@ -433,16 +437,16 @@ function getUnitListData(request, content, callback) {
 };
 
 function postUnitData(request, content, callback) {
-	console.log("postUnitData")
+	//console.log("postUnitData")
 	// Hinzufügen
 	if (content.add!==undefined) {
-		console.log("Add")
+		//console.log("Add")
 		/* Prepare Queries */
 		var sqlQuery = 'INSERT INTO item_unit SET ?';
 		//console.log(request);
-		console.log(content.add);
+		//console.log(content.add);
 		var sql = mysql.format(sqlQuery, content.add);
-		console.log(sql);
+		//console.log(sql);
 	}
 	// Entfernen
 	if (content.delete!==undefined) {
@@ -495,7 +499,7 @@ function printOut(request, content, callback){
 	});
 	var exec  = require('child_process').exec;
 	var child = exec('cd .. && sudo python einkaufszettel.py', function(err, stdout, stderr){
-		console.log(err, stdout, stderr);
+		//console.log(err, stdout, stderr);
 	});
 	callback(null, 'ok');
 }
