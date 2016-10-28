@@ -465,7 +465,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
       angular.element(turbine).trigger("GoToProducts");
     };
 
-    Sscope.clearList = function() {
+    $scope.clearList = function() {
     	ShoppingListFactory.post({}, {truncate: true})
     		.$promise.then(function(data) {
     			refresh();
