@@ -179,8 +179,16 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					publish : {
 						message : 'GoToCart'
 					},
-					waitFor : 'shoppinglist:add',
-					then : 'inCatalog'
+					waitFor : [
+						{
+							message : 'shoppinglist:add',
+							then : 'inCatalog'
+						},
+						{
+							message : 'shoppinglist:trash',
+							then : 'isAppRunning'
+						}
+					]
 				}
 			},
 
