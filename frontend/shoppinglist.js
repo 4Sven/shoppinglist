@@ -171,7 +171,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		},
 		responses      : {
 			isAppRunning : true,
-			editProducts : true
+			listProducts : true
 		},
 		workflow       : {
 
@@ -191,23 +191,29 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						},
 						{
 							message : 'GoToProducts',
-							then : 'editProducts'
+							then : 'listProducts'
 						}
 					]
 				}
 			},
 
-			editProducts : {
+			listProducts : {
 				yes : {
 					publish : {
 						message : 'GoToProductsList'
 					},
 					waitFor : [
 						{
-							message : 'productList:add'
+							message : 'productList:add',
+							then    : 'addProduct'
 						},
 						{
-							message : 'productList:edit'
+							message : 'productList:edit',
+							then    : 'editProducts'
+						},
+						{
+							message : 'productList:back',
+							then    : 'isAppRunning'
 						}
 					]
 				}
@@ -219,7 +225,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						message : 'addToCart'
 					},
 					waitFor : 'addedToCart',
-					then : 'isAppRunning'
+					then    : 'isAppRunning'
 				},
 				no  : {
 					publish : {
@@ -231,11 +237,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 					waitFor : [
 						{
 							message : 'makeNewEntry:added',
-							then : 'inCatalog'
+							then    : 'inCatalog'
 						},
 						{
 							message : 'makeNewEntry:cancel',
-							then : 'isAppRunning'
+							then    : 'isAppRunning'
 						}
 					]
 				}
@@ -730,7 +736,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 
 
-.controller('ProductListCtrl', function($scope, $log, $location, TempStoreData, Product, Alert) {
+.controller('ProductListCtrl', function($scope, $log, $location, Item, Product, Alert) {
 	//Pagination
 	$scope.setPage = function (pageNo) {
     	$scope.CurrentPage = pageNo;
@@ -761,7 +767,6 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	$scope.sqlSearch = '%';
 
 	refresh = function() {
-		TempStoreData.set({});
 		Product.query({
 			page:    $scope.CurrentPage,
 			items:   $scope.itemsPerPage,
@@ -784,8 +789,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	// Produkt bearbeiten
 	$scope.edit = function(productData) {
+		Item = productData;
 		$location.path("/productdetails");
-		TempStoreData.set(productData);
 	};
 
 	$scope.drop = function(productData) {
@@ -807,6 +812,9 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 			});
 	};
 
+	$scope.back = function() {
+      angular.element(turbine).trigger("productList:back");
+    };
 
 })
 
