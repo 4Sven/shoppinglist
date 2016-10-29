@@ -212,8 +212,16 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 							then    : 'editProducts'
 						},
 						{
+							message : 'editProduct:drop',
+							then    : 'listProducts'
+						},
+						{
 							message : 'productList:back',
 							then    : 'isAppRunning'
+						},
+						{
+							message : 'makeNewEntry:cancel',
+							then    : 'listProducts'
 						}
 					]
 				}
@@ -938,7 +946,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 							$log.error(data.error.errno);
 					}
 				} else {
-					$location.path("/products");
+					var $rootScope = angular.element(turbine).trigger('editProduct:drop');
 				}
 			});
 	};
