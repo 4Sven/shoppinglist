@@ -791,7 +791,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	// create
 	$scope.create = function() {
-		if($scope.item) Item.load = $scope.item;
+		$log.log('create a new product… ', $scope.item);
+		if($scope.item) Item.load($scope.item);
 		$location.path('/productdetails');
 	};
 
@@ -839,9 +840,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	refresh();
 
 })
-.controller('ProductCtrl', function($scope, $rootScope, $log, $location, Item, TempStoreData, Product, Unit, Category, Alert) {
+.controller('ProductCtrl', function($scope, $rootScope, $log, $location, Item, Product, Unit, Category, Alert) {
 	console.log("ProductCtrl");
 	$scope.item = Item.get();
+	$log.log($scope.item);
 
 	getCategories = function() {
 		Category.query()
