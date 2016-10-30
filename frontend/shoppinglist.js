@@ -791,8 +791,8 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	// create
 	$scope.create = function() {
-		$location.path('/productdetails');
 		if($scope.item) Item.load = $scope.item;
+		$location.path('/productdetails');
 	};
 
 	// Produkt bearbeiten
