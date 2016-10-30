@@ -792,7 +792,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 	// create
 	$scope.create = function() {
 		$location.path('/productdetails');
-		if($scope.item) TempStoreData.set($scope.item);
+		if($scope.item) Item.load = $scope.item;
 	};
 
 	// Produkt bearbeiten
