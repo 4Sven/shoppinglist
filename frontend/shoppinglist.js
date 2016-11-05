@@ -752,7 +752,7 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 
 
-.controller('ProductListCtrl', function($scope, $log, $location, Item, Product, Alert) {
+.controller('ProductListCtrl', function($scope, $log, $location, Workflow, Item, Product, Alert) {
 	//Pagination
 	$scope.setPage = function (pageNo) {
     	$scope.CurrentPage = pageNo;
