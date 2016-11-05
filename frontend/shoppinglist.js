@@ -269,6 +269,12 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 		$location.path('/shoppinglist');
 	});
 
+	var $rootScope = angular.element(turbine).bind('productList:back', function(event, payload) {
+		Item.reset();
+		$log.debug('Running productList:back...', payload, Item);
+		$location.path('/shoppinglist');
+	});
+
 	var $rootScope = angular.element(turbine).bind('GoToProductsList', function(event, payload) {
 		$log.debug('Running GoToProductsList...', payload, Item);
 		$location.path('/products');
