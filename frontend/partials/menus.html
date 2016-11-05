@@ -9,10 +9,10 @@
           <tr ng-repeat="item in MenuDataList">
             <td>{{item.meal_name}}</td>
             <td>
-              <a href="" ng-click="addmenu(item)"><span class="glyphicon glyphicon-plus"></span></a>
-              <a href="" ng-click="edit(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a href="" ng-click="add(item)"><span class="glyphicon glyphicon-plus"></span></a>
+              <a href="" ng-click="edit(item)" ng-show="false"><span class="glyphicon glyphicon-pencil"></span></a>
               <a href="" ng-click="drop(item)"><span class="glyphicon glyphicon-trash"></span></a>
-              <a href="" ng-click="cart(item)"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+              <a href="" ng-click="cart(item)" ng-show="false"><span class="glyphicon glyphicon-shopping-cart"></span></a>
             </td>
           </tr>
         </table>

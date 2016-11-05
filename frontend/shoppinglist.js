@@ -222,6 +222,10 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 						{
 							message : 'makeNewEntry:cancel',
 							then    : 'listProducts'
+						},
+						{
+							message : 'GoToCart',
+							then    : 'isAppRunning'
 						}
 					]
 				}
@@ -319,7 +323,11 @@ angular.module('shoppingListApp', ['ui.bootstrap','ngResource','ngRoute','ngTouc
 
 	$scope.go = function(path) {
 		$location.path(path);
-	};	
+	};
+
+	$scope.trigger = function(triggername) {
+		angular.element(turbine).trigger(triggername);
+	};
 
 	$scope.onHammer = function(event) {
 		$log.log(event);
